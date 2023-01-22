@@ -1,1 +1,1 @@
-# -DigitalOffice-EventService
+# DigitalOffice-EventService
