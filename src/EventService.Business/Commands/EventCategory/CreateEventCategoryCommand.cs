@@ -48,7 +48,7 @@ public class CreateEventCategoryCommand : ICreateEventCategoryCommand
       return _responseCreator.CreateFailureResponse<bool>(HttpStatusCode.Forbidden);
     }
 
-    request.CategoryIds = request.CategoryIds.Distinct().ToList();
+    request.CategoriesIds = request.CategoriesIds.Distinct().ToList();
 
     ValidationResult validationResult = await _validator.ValidateAsync(request);
 
@@ -56,7 +56,7 @@ public class CreateEventCategoryCommand : ICreateEventCategoryCommand
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.BadRequest,
-        validationResult.Errors.Select(vf => vf.ErrorMessage).ToList());
+        validationResult.Errors.ConvertAll(er => er.ErrorMessage));
     }
 
     OperationResultResponse<bool> response = new();

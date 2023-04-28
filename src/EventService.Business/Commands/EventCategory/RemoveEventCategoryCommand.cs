@@ -49,12 +49,12 @@ public class RemoveEventCategoryCommand : IRemoveEventCategoryCommand
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.BadRequest,
-        validationResult.Errors.Select(er => er.ErrorMessage).ToList());
+        validationResult.Errors.ConvertAll(er => er.ErrorMessage));
     }
 
     OperationResultResponse<bool> response = new()
     {
-      Body = await _repository.RemoveAsync(request.EventId, request.EventCategoriesIds)
+      Body = await _repository.RemoveAsync(request.EventId, request.CategoriesIds)
     };
 
     if (!response.Body)

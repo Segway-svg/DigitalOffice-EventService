@@ -22,7 +22,7 @@ public class DbEventCategoryMapper : IDbEventCategoryMapper
   {
     return request is null
       ? null
-      : request.CategoryIds.Select(categoryId => new DbEventCategory
+      : request.CategoriesIds.Select(categoryId => new DbEventCategory
       {
         Id = Guid.NewGuid(),
         EventId = request.EventId,

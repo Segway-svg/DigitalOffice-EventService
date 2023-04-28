@@ -11,7 +11,9 @@ namespace LT.DigitalOffice.EventService.Mappers.Db;
 public class DbEventUserMapper : IDbEventUserMapper
 {
   public List<DbEventUser> Map(
-    CreateEventUserRequest request, AccessType access, Guid senderId)
+    CreateEventUserRequest request,
+    AccessType access,
+    Guid senderId)
   {
     return request is null
       ? null
