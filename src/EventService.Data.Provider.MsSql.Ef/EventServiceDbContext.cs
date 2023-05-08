@@ -15,6 +15,7 @@ public class EventServiceDbContext : DbContext, IDataProvider
   public DbSet<DbEventComment> EventComments { get; set; }
   public DbSet<DbOccasion> Occasions { get; set; }
 
+
   public EventServiceDbContext(DbContextOptions<EventServiceDbContext> options)
     : base(options)
   {
