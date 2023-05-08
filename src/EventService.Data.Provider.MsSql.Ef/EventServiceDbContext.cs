@@ -17,6 +17,7 @@ public class EventServiceDbContext : DbContext, IDataProvider
   public DbSet<DbOccasionGroup> OccasionsGroups { get; set; }
   public DbSet<DbGroupEventUser> GroupsEventsUsers { get; set; }
 
+
   public EventServiceDbContext(DbContextOptions<EventServiceDbContext> options)
     : base(options)
   {
