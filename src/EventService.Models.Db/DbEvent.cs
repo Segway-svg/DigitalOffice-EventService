@@ -26,7 +26,8 @@ public class DbEvent
   public ICollection<DbEventImage> Images { get; set; }
   public ICollection<DbEventUser> Users { get; set; }
   public ICollection<DbEventComment> Comments { get; set; }
-  
+  public ICollection<DbOccasion> Occasions { get; set; }
+
   public DbEvent()
   {
     EventsCategories = new HashSet<DbEventCategory>();
@@ -34,6 +35,7 @@ public class DbEvent
     Images = new HashSet<DbEventImage>();
     Users = new HashSet<DbEventUser>();
     Comments = new HashSet<DbEventComment>();
+    Occasions = new HashSet<DbOccasion>();
   }
 
   public class DbEventConfiguration : IEntityTypeConfiguration<DbEvent>
