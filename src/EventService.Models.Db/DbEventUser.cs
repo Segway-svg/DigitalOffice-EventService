@@ -21,6 +21,7 @@ public class DbEventUser
   public DateTime? ModifiedAtUtc { get; set; }
 
   public DbEvent Event { get; set; }
+  // public List<Guid> Preferences { get; set; }
   public ICollection<DbGroupEventUser> GroupsEventsUsers { get; set; }
 }
 

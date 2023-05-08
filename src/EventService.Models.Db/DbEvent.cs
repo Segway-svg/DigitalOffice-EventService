@@ -17,6 +17,8 @@ public class DbEvent
   public FormatType Format { get; set; }
   public AccessType Access { get; set; }
   public bool IsActive { get; set; }
+  public string Poll { get; set; }
+  public DateTime? Deadline { get; set; }
   public Guid CreatedBy { get; set; }
   public DateTime CreatedAtUtc { get; set; }
   public Guid? ModifiedBy { get; set; }
