@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,7 @@ public class DbOccasion
 {
   public const string TableName = "Occasions";
   public Guid Id { get; set; }
+  public Guid EventId { get; set; }
   public string Name { get; set; }
   public string Description { get; set; }
   public int? MaxGroup { get; set; } 
@@ -18,7 +20,7 @@ public class DbOccasion
   public DateTime? ModifiedAtUtc { get; set; }
   
   public DbEvent Event { get; set; }
-  // public ICollection<DbEventUser> Users { get; set; }
+  public ICollection<DbOccasionGroup> OccasionsGroups { get; set; }
   
   public class DbOccasionConfiguration : IEntityTypeConfiguration<DbOccasion>
   {
@@ -33,6 +35,10 @@ public class DbOccasion
       builder
         .HasOne(eu => eu.Event)
         .WithMany(e => e.Occasions);
+      
+      builder
+        .HasMany(e => e.OccasionsGroups)
+        .WithOne(ec => ec.Occasion);
     }
   }
 }

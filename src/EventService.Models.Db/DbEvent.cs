@@ -63,6 +63,10 @@ public class DbEvent
       builder
         .HasMany(e => e.Users)
         .WithOne(eu => eu.Event);
+      
+      builder
+        .HasMany(e => e.Occasions)
+        .WithOne(eu => eu.Event);
     }
   }
 }
