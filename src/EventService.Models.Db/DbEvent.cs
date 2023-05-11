@@ -17,8 +17,6 @@ public class DbEvent
   public FormatType Format { get; set; }
   public AccessType Access { get; set; }
   public bool IsActive { get; set; }
-  public string Poll { get; set; }
-  public DateTime? Deadline { get; set; }
   public Guid CreatedBy { get; set; }
   public DateTime CreatedAtUtc { get; set; }
   public Guid? ModifiedBy { get; set; }
@@ -28,8 +26,7 @@ public class DbEvent
   public ICollection<DbEventImage> Images { get; set; }
   public ICollection<DbEventUser> Users { get; set; }
   public ICollection<DbEventComment> Comments { get; set; }
-  public ICollection<DbOccasion> Occasions { get; set; }
-
+  
   public DbEvent()
   {
     EventsCategories = new HashSet<DbEventCategory>();
@@ -37,7 +34,6 @@ public class DbEvent
     Images = new HashSet<DbEventImage>();
     Users = new HashSet<DbEventUser>();
     Comments = new HashSet<DbEventComment>();
-    Occasions = new HashSet<DbOccasion>();
   }
 
   public class DbEventConfiguration : IEntityTypeConfiguration<DbEvent>
@@ -64,10 +60,6 @@ public class DbEvent
 
       builder
         .HasMany(e => e.Users)
-        .WithOne(eu => eu.Event);
-      
-      builder
-        .HasMany(e => e.Occasions)
         .WithOne(eu => eu.Event);
     }
   }
