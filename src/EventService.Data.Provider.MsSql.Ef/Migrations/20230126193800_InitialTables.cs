@@ -157,6 +157,85 @@ public class InitialTables : Migration
       });
   }
   
+  private void CreateGroupsTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbGroup.TableName,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        Name = table.Column<string>(nullable: false),
+        MaxGuests = table.Column<int>(nullable: true),
+        Description = table.Column<string>(nullable: false),
+        IsActive = table.Column<bool>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false),
+        CreatedAtUtc = table.Column<DateTime>(nullable: false),
+        ModifiedBy = table.Column<Guid>(nullable: true),
+        ModifiedAtUtc = table.Column<DateTime>(nullable: true) 
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbGroup.TableName}", ec => ec.Id);
+      });
+  }
+  
+  private void CreateOccasionsTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbOccasion.TableName,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        EventId = table.Column<Guid>(nullable: false),
+        Name = table.Column<string>(nullable: false),
+        MaxGroup = table.Column<int>(nullable: true),
+        Description = table.Column<string>(nullable: true),
+        IsActive = table.Column<bool>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false),
+        CreatedAtUtc = table.Column<DateTime>(nullable: false),
+        ModifiedBy = table.Column<Guid>(nullable: true),
+        ModifiedAtUtc = table.Column<DateTime>(nullable: true) 
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbOccasion.TableName}", ec => ec.Id);
+      });
+  }
+  
+  private void CreateGroupsEventsUsersTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbGroupEventUser.TableName,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        EventUserId = table.Column<Guid>(nullable: false),
+        GroupId = table.Column<Guid>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false)
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbGroupEventUser.TableName}", ec => ec.Id);
+      });
+  }
+  
+  private void CreateOccasionsGroupsTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbOccasionGroup.TableName,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        GroupId = table.Column<Guid>(nullable: false),
+        OccasionId = table.Column<Guid>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false)
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbOccasionGroup.TableName}", ec => ec.Id);
+      });
+  }
+
   protected override void Up(MigrationBuilder migrationBuilder)
   {
     CreateEventsTable(migrationBuilder);
@@ -166,6 +245,10 @@ public class InitialTables : Migration
     CreateEventCommentsTable(migrationBuilder);
     CreateEventImagesTable(migrationBuilder);
     CreateEventFilesTable(migrationBuilder);
+    CreateGroupsTable(migrationBuilder);
+    CreateOccasionsTable(migrationBuilder);
+    CreateGroupsEventsUsersTable(migrationBuilder);
+    CreateOccasionsGroupsTable(migrationBuilder);
   }
 
   protected override void Down(MigrationBuilder migrationBuilder)
@@ -177,5 +260,9 @@ public class InitialTables : Migration
     migrationBuilder.DropTable(DbEventComment.TableName);
     migrationBuilder.DropTable(DbEventImage.TableName);
     migrationBuilder.DropTable(DbEventFile.TableName);
+    migrationBuilder.DropTable(DbGroup.TableName);
+    migrationBuilder.DropTable(DbOccasion.TableName);
+    migrationBuilder.DropTable(DbGroupEventUser.TableName);
+    migrationBuilder.DropTable(DbOccasionGroup.TableName);
   }
 }
